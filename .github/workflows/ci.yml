@@ -1,0 +1,47 @@
+name: CI - Carteira de Pagamentos
+
+on:
+  # Execução por push em qualquer branch
+  push:
+    branches:
+      - main
+      - master
+  
+  # Execução em pull requests
+  pull_request:
+    branches:
+      - main
+      - master
+  
+  # Execução manual via interface do GitHub
+  workflow_dispatch:
+  
+  # Execução agendada: a cada 7 minutos
+  schedule:
+    - cron: '*/7 * * * *'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Instalar dependências
+        run: npm install
+      
+      - name: Executar testes
+        run: npm test
+      
+      - name: Gerar relatório de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-report/

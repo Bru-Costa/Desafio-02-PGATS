@@ -5,12 +5,13 @@
   "main": "src/CarteiraDePagamentos.js",
   "type": "module",
   "scripts": {
-    "test": "mocha test/*.test.js"
+    "test": "mocha test/*.test.js --reporter mochawesome --reporter-options reportDir=test-report,reportFilename=index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mocha": "^11.0.1"
+    "mocha": "^11.0.1",
+    "mochawesome": "^7.1.3"
   }
 }
